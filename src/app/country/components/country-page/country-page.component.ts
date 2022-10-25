@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/shared/services/data.service';
+import { SearchService } from 'src/app/shared/services/search.service';
 
 @Component({
   selector: 'app-country-page',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CountryPageComponent implements OnInit {
 
-  constructor() { }
+  covidData: any;
+  constructor(private dataService: DataService,
+    private searchService: SearchService) { }
 
   ngOnInit(): void {
+    this.dataService.getSummaryData()
+    .subscribe(
+      (data:any) => {
+        this.covidData = data;
+      }
+    )
+  }
+
+  searchCountry(country: string) {
+    const countries = this.covidData.Countries
+    .filter(
+      (c: any) => c.Country.toLowerCase().includes(country.toLocaleLowerCase())
+    );
+    this.searchService.setCountries(countries);
   }
 
 }
