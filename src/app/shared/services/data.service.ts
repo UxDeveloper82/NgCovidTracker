@@ -14,8 +14,8 @@ export class DataService {
     console.log('Getting Summary Data');
     return this.http.get(`${this.apiUrl}/summary`)
    }
-   
-   getCountryDataByDate(country: string, date: string) {
+
+   getCountyDataByDate(country: string, date: string) {
     return this.http.get(`${this.apiUrl}/total/country/${country}/status/confirmed?${date}`);
    }
 

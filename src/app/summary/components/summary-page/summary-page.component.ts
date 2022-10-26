@@ -15,7 +15,8 @@ export class SummaryPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.getSummaryData()
-    .subscribe((data: any) => {
+    .subscribe(
+      (data: any) => {
       this.covidData = data;
     });
   }
